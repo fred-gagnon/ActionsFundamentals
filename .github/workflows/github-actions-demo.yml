@@ -1,0 +1,41 @@
+name: GitHub Actions Demo
+
+on:
+  push:
+    branches: 
+    - main
+    paths-ignore:
+    - .github
+  pull_request:
+    branches:
+    - main
+  schedule:
+    - cron: '15 6 * * 0'
+  workflow_dispatch:
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: 'ActionsFundamentals'
+
+      - name: Print Event Name
+        shell: bash
+        run: |
+          echo "Event name is: '${GITHUB_EVENT_NAME}'"
+
+      - name: Print Branch Name
+        shell: bash
+        run: |
+          echo "Branch name is: '${GITHUB_REF_NAME}'"
+      
+      - name: List Repository Files
+        shell: bash
+        run: |
+          cd "${GITHUB_WORKSPACE}/ActionsFundamentals"
+          ls -R 
+
+
+    
