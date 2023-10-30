@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Say hello
+        id: SayHello
         uses: fred-gagnon/hello-world-docker-action@v1
         with:
           who-to-greet: '@FredGagnon'
@@ -13,4 +14,4 @@ jobs:
       - name: Print output
         shell: bash
         run: |
-          echo "We said hello at '${{ outputs.time }}'"
+          echo "We said hello at '${{ steps.SayHello.outputs.time }}'"
