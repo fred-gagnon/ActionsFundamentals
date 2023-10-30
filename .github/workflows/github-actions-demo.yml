@@ -31,7 +31,7 @@ jobs:
       - name: List Repository Files
         shell: bash
         run: |
-          cd "${GITHUB_WORKSPACE}/ActionsFundamentals"
+          cd "${{ github.workspace }}/ActionsFundamentals"
           tree
 
 
