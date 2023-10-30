@@ -19,14 +19,14 @@ jobs:
           path: 'ActionsFundamentals'
 
       - name: Print Event Name
-        shell: pwsh
+        shell: bash
         run: |
-          Write-Host "Event name is: '${{ github.event_name }}'"
+          echo "Event name is: '${{ github.event_name }}'"
 
       - name: Print Branch Name
-        shell: pwsh
+        shell: bash
         run: |
-          Write-Host "Branch name is: '${{ github.ref_name }}'"
+          echo "Branch name is: '${{ github.ref_name }}'"
       
       - name: List Repository Files
         shell: bash
