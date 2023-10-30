@@ -9,3 +9,8 @@ jobs:
         uses: fred-gagnon/hello-world-docker-action@v1
         with:
           who-to-greet: '@FredGagnon'
+
+      - name: Print output
+        shell: bash
+        run: |
+          echo "We said hello at '${{ outputs.time }}'"
