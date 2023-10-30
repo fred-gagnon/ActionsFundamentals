@@ -1,4 +1,4 @@
-name: Test
+name: CI Build for Docker with External Action
 on: [workflow_dispatch]
 
 jobs:
