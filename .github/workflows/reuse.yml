@@ -17,5 +17,5 @@ jobs:
       id: PrintOutput
       shell: bash
       run: |
-        echo "Output was '${{ needs.call-workflow.outputs.current-time }}'"
+        echo "Output was ${{ needs.call-workflow.outputs.current-time }}"
 
