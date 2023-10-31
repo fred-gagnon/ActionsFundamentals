@@ -28,4 +28,4 @@ jobs:
         id: time
         shell: bash
         run: |
-          echo "time=$(date)" >> GITHUB_OUTPUT
+          echo "time=$(date)" >> $GITHUB_OUTPUT
