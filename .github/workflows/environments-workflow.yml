@@ -1,0 +1,88 @@
+name: GitHub Actions Environments
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        type: environment
+        required: true
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: 'ActionsFundamentals'
+
+      - name: Print Event Name
+        shell: bash
+        run: |
+          echo "Event name is: '${{ github.event_name }}'"
+
+      - name: Print Branch Name
+        shell: bash
+        run: |
+          echo "Branch name is: '${{ github.ref_name }}'"
+      
+      - name: List Repository Files
+        shell: bash
+        run: |
+          cd "${{ github.workspace }}/ActionsFundamentals"
+          tree
+
+  Test:
+    needs: Build
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    environment: Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Work
+      shell: bash
+      run: |
+        echo "Testing ..."
+
+  Load-Test:
+    needs: Build
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    environment: Load-Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Work
+      shell: bash
+      run: |
+        echo "Testing ..."
+        sleep 15
+
+  Production:
+    needs: [Test, Load-Test]
+    if: ${{ inputs.environment == 'Production' }}
+    environment:
+      name: ${{ inputs.environment }}
+      url: 'https://writeabout.net'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Step 1
+      shell: bash
+      run: |
+        echo "Step 1 deploying ..."
+    - name: Step 2
+      shell: bash
+      run: |
+        echo "Step 2 deploying ..."
+    - name: Step 3
+      shell: bash
+      run: |
+        echo "Step 3 deploying ..."
+    - name: Step 4
+      shell: bash
+      run: |
+        echo "Step 4 deploying ..."
+    - name: Step 5
+      shell: bash
+      run: |
+        echo "Step 5 deploying ..."
+        
+
+
