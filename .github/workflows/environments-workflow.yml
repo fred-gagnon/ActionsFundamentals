@@ -6,7 +6,8 @@ on:
       environment:
         description: 'Environment to deploy to'
         type: environment
-        required: true
+        default: Production
+        required: false
 
 jobs:
   Build:
@@ -66,8 +67,10 @@ jobs:
     steps:
     - name: Step 1
       shell: bash
+      env:
+        URL: ${{ job.environment.url }}
       run: |
-        echo "Step 1 deploying to '${{ job.environment.url }}' ..."
+        echo "Step 1 deploying to '${URL}' ..."
     - name: Step 2
       shell: bash
       run: |
