@@ -67,7 +67,7 @@ jobs:
     - name: Step 1
       shell: bash
       run: |
-        echo "Step 1 deploying to '${{ github.jobs.Production.environment.url }}' ..."
+        echo "Step 1 deploying to '${{ job.environment.url }}' ..."
     - name: Step 2
       shell: bash
       run: |
