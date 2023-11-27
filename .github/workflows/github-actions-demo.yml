@@ -17,6 +17,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: 'ActionsFundamentals'
+      
+      - name: Create error
+        shell: pwsh
+        run: |
+          throw "Error!"
 
       - name: Print Event Name
         shell: bash
