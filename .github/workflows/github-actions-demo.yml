@@ -18,10 +18,10 @@ jobs:
         with:
           path: 'ActionsFundamentals'
       
-      - name: Create error
+      - name: Print Repository Owner
         shell: pwsh
         run: |
-          throw "Error!"
+          Write-Host "Repository owner: '${{ github.repository.owner }}'"
 
       - name: Print Event Name
         shell: bash
