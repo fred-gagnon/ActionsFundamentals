@@ -21,7 +21,7 @@ jobs:
       - name: Print Repository Owner
         shell: pwsh
         run: |
-          Write-Host "Repository owner: '${{ github.repository.owner }}'"
+          Write-Host "Repository owner: '${{ github.repository_owner }}'"
 
       - name: Print Event Name
         shell: bash
