@@ -18,6 +18,7 @@ jobs:
           [byte[]]$out = New-Object -TypeName 'byte[]' -ArgumentList (1GB)
           New-Object -TypeName 'Random' | ForEach-Object { $_.NextBytes($out) }
           [IO.File]::WriteAllBytes('C:\Temp\RandomText.txt', $out)
+          Get-Item -Path $path
 
       - name: Cache File
         uses: actions/cache@v4
