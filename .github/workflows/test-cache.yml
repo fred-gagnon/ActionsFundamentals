@@ -1,0 +1,40 @@
+name: CacheTest
+
+on: [create, workflow_dispatch]
+
+permissions: 
+  issues: write
+  contents: read
+
+jobs:
+  generate_artifact:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+
+      - name: Create Artifact
+        shell: pwsh
+        run: |
+          [string]$path = Join-Path -Path '${{ runner.workspace }}' -ChildPath 'Cache/BigFile.txt'
+          New-Item -Path $path -ItemType File -Force | Out-Null
+          [byte[]]$out = New-Object -TypeName 'byte[]' -ArgumentList (16 * 1GB)
+          New-Object -TypeName 'Random' | ForEach-Object { $_.NextBytes($out) }
+          [IO.File]::WriteAllBytes('C:\Temp\RandomText.txt', $out)
+
+      - name: Cache File
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.workspace }}/Cache
+          key: MyCache
+  
+  restore_artifact:
+    runs-on: windows-latest
+    needs: generate_artifact
+    steps:
+      - name: Restore Cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.workspace }}/Cache
+          key: MyCache
+  
