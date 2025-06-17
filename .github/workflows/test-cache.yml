@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 jobs:
-  generate_artifact:
+  GenerateArtifact:
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -18,7 +18,7 @@ jobs:
         run: |
           [string]$path = Join-Path -Path '${{ runner.workspace }}' -ChildPath 'Cache/BigFile.txt'
           New-Item -Path $path -ItemType File -Force | Out-Null
-          [byte[]]$out = New-Object -TypeName 'byte[]' -ArgumentList (16 * 1GB)
+          [byte[]]$out = New-Object -TypeName 'byte[]' -ArgumentList (1GB)
           New-Object -TypeName 'Random' | ForEach-Object { $_.NextBytes($out) }
           [IO.File]::WriteAllBytes('C:\Temp\RandomText.txt', $out)
 
@@ -28,9 +28,9 @@ jobs:
           path: ${{ runner.workspace }}/Cache
           key: MyCache
   
-  restore_artifact:
+  RestoreArtifact:
     runs-on: windows-latest
-    needs: generate_artifact
+    needs: GenerateArtifact
     steps:
       - name: Restore Cache
         uses: actions/cache@v4
