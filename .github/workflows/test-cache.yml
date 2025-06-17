@@ -10,9 +10,6 @@ jobs:
   GenerateArtifact:
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3.3.0
-
       - name: Create Artifact
         shell: pwsh
         run: |
@@ -26,7 +23,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.workspace }}/Cache
-          key: MyCache
+          key: MyCache-${{ github.run_id }}
   
   RestoreArtifact:
     runs-on: windows-latest
@@ -36,7 +33,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.workspace }}/Cache
-          key: MyCache
+          key: MyCache-${{ github.run_id }}
 
       - name: Test Artifact
         shell: pwsh
