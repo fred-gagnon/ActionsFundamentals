@@ -37,4 +37,9 @@ jobs:
         with:
           path: ${{ runner.workspace }}/Cache
           key: MyCache
-  
+
+      - name: Test Artifact
+        shell: pwsh
+        run: |
+          [string]$path = Join-Path -Path '${{ runner.workspace }}' -ChildPath 'Cache/BigFile.txt' -Resolve
+          Get-Item -Path $path
