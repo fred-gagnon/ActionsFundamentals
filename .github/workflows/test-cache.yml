@@ -13,6 +13,8 @@ jobs:
       - name: Create Artifact
         shell: pwsh
         run: |
+          Get-Command -Name zstd | Out-String | Write-Host
+
           [string]$path = Join-Path -Path '${{ runner.workspace }}' -ChildPath 'Cache/BigFile.txt'
           New-Item -Path $path -ItemType File -Force | Out-Null
           [byte[]]$out = New-Object -TypeName 'byte[]' -ArgumentList (1GB)
