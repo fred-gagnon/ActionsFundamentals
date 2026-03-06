@@ -27,7 +27,13 @@ jobs:
         with:
           path: ${{ runner.workspace }}/Cache
           key: MyCache-${{ github.run_id }}
-  
+
+      - name: Cache File
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.workspace }}/Cache
+          key: MyCache-${{ github.run_id }}
+
   RestoreArtifact:
     runs-on: windows-latest
     needs: GenerateArtifact
